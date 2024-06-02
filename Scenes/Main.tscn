@@ -1,56 +1,36 @@
 [gd_scene load_steps=8 format=3 uid="uid://cupd3a08pm1u5"]
 
-[ext_resource type="PackedScene" uid="uid://b1q73ldxbmvld" path="res://Ball.tscn" id="1_s7nuc"]
-[ext_resource type="Script" path="res://InitialForceBall.gd" id="2_yoeje"]
+[ext_resource type="PackedScene" uid="uid://b1q73ldxbmvld" path="res://Scenes/Ball.tscn" id="1_s7nuc"]
+[ext_resource type="Texture2D" uid="uid://u56cnqx5b8ft" path="res://Sprites/Background.jpg" id="2_yk2ep"]
+[ext_resource type="PackedScene" uid="uid://cknbif3r78xny" path="res://Scenes/Bounds.tscn" id="3_luv3b"]
+[ext_resource type="Script" path="res://Scripts/BoxesManager.gd" id="4_et37k"]
+[ext_resource type="Shader" path="res://Scenes/BackgroundInfinite.gdshader" id="4_qhjs8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f05sw"]
+shader = ExtResource("4_qhjs8")
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_amjsa"]
 friction = 0.0
 bounce = 1.0
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_d8unf"]
-a = Vector2(309, 601)
-b = Vector2(-308.465, 601)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_5ldop"]
-a = Vector2(309, -601)
-b = Vector2(-308.465, -601)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_jb0by"]
-a = Vector2(-271, -621)
-b = Vector2(-271, 628)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_nf3ef"]
-a = Vector2(271, -621)
-b = Vector2(271, 628)
-
 [node name="Main" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_repeat = 3
+material = SubResource("ShaderMaterial_f05sw")
+texture = ExtResource("2_yk2ep")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Ball" parent="." instance=ExtResource("1_s7nuc")]
+[node name="Bounds" parent="." instance=ExtResource("3_luv3b")]
+
+[node name="BoxesManager" type="Node2D" parent="."]
+script = ExtResource("4_et37k")
+
+[node name="BallParent" type="Node2D" parent="."]
+
+[node name="Ball_0" parent="BallParent" instance=ExtResource("1_s7nuc")]
+position = Vector2(2, 0)
 physics_material_override = SubResource("PhysicsMaterial_amjsa")
 linear_damp_mode = 1
 angular_damp_mode = 1
-script = ExtResource("2_yoeje")
-
-[node name="Bounds" type="Node2D" parent="."]
-
-[node name="BottomStaticBody" type="StaticBody2D" parent="Bounds"]
-
-[node name="Bottom" type="CollisionShape2D" parent="Bounds/BottomStaticBody"]
-shape = SubResource("SegmentShape2D_d8unf")
-
-[node name="TopStaticBody" type="StaticBody2D" parent="Bounds"]
-
-[node name="Top" type="CollisionShape2D" parent="Bounds/TopStaticBody"]
-shape = SubResource("SegmentShape2D_5ldop")
-
-[node name="LeftStaticBody" type="StaticBody2D" parent="Bounds"]
-
-[node name="Left" type="CollisionShape2D" parent="Bounds/LeftStaticBody"]
-shape = SubResource("SegmentShape2D_jb0by")
-
-[node name="RightStaticBody" type="StaticBody2D" parent="Bounds"]
-
-[node name="Right" type="CollisionShape2D" parent="Bounds/RightStaticBody"]
-shape = SubResource("SegmentShape2D_nf3ef")

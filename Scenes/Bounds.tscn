@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://cknbif3r78xny"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_d8unf"]
+a = Vector2(309, 601)
+b = Vector2(-308.465, 601)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_5ldop"]
+a = Vector2(309, -601)
+b = Vector2(-308.465, -601)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_jb0by"]
+a = Vector2(-271, -621)
+b = Vector2(-271, 628)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_nf3ef"]
+a = Vector2(271, -621)
+b = Vector2(271, 628)
+
+[node name="Bounds" type="Node2D"]
+
+[node name="BottomStaticBody" type="StaticBody2D" parent="."]
+
+[node name="Bottom" type="CollisionShape2D" parent="BottomStaticBody"]
+shape = SubResource("SegmentShape2D_d8unf")
+
+[node name="TopStaticBody" type="StaticBody2D" parent="."]
+
+[node name="Top" type="CollisionShape2D" parent="TopStaticBody"]
+shape = SubResource("SegmentShape2D_5ldop")
+
+[node name="LeftStaticBody" type="StaticBody2D" parent="."]
+
+[node name="Left" type="CollisionShape2D" parent="LeftStaticBody"]
+shape = SubResource("SegmentShape2D_jb0by")
+
+[node name="RightStaticBody" type="StaticBody2D" parent="."]
+
+[node name="Right" type="CollisionShape2D" parent="RightStaticBody"]
+shape = SubResource("SegmentShape2D_nf3ef")

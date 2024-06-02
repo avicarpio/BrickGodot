@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://b1q73ldxbmvld"]
+
+[ext_resource type="Texture2D" uid="uid://dd7xx4m7r32a1" path="res://Sprites/BallSprite.png" id="1_i2y3i"]
+[ext_resource type="Script" path="res://Scripts/InitialForceBall.gd" id="1_onu36"]
+[ext_resource type="Script" path="res://Trail2D.gd" id="2_kx6ec"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ykatq"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0qneq"]
+radius = 18.0
+
+[sub_resource type="Curve" id="Curve_0fdk3"]
+max_value = 2.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 2), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_xnmkh"]
+offsets = PackedFloat32Array(0.373333, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.0784314)
+
+[node name="Ball" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_ykatq")
+gravity_scale = 0.0
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("1_onu36")
+
+[node name="BallCollider" type="CollisionShape2D" parent="."]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_0qneq")
+
+[node name="BallSprite" type="Sprite2D" parent="BallCollider"]
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(0.105, 0.105)
+texture = ExtResource("1_i2y3i")
+
+[node name="Trail" type="Line2D" parent="."]
+show_behind_parent = true
+width_curve = SubResource("Curve_0fdk3")
+default_color = Color(1, 1, 1, 0.0392157)
+gradient = SubResource("Gradient_xnmkh")
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("2_kx6ec")
+length = 40
