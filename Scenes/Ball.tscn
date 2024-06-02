@@ -18,9 +18,10 @@ point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_xnmkh"]
 offsets = PackedFloat32Array(0.373333, 1)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.0784314)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.784314)
 
 [node name="Ball" type="RigidBody2D"]
+collision_layer = 2
 physics_material_override = SubResource("PhysicsMaterial_ykatq")
 gravity_scale = 0.0
 max_contacts_reported = 1
@@ -28,18 +29,17 @@ contact_monitor = true
 script = ExtResource("1_onu36")
 
 [node name="BallCollider" type="CollisionShape2D" parent="."]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.8, 0.8)
 shape = SubResource("CircleShape2D_0qneq")
 
 [node name="BallSprite" type="Sprite2D" parent="BallCollider"]
-modulate = Color(1, 0, 0, 1)
 scale = Vector2(0.105, 0.105)
 texture = ExtResource("1_i2y3i")
 
 [node name="Trail" type="Line2D" parent="."]
 show_behind_parent = true
 width_curve = SubResource("Curve_0fdk3")
-default_color = Color(1, 1, 1, 0.0392157)
+default_color = Color(1, 1, 1, 0.392157)
 gradient = SubResource("Gradient_xnmkh")
 joint_mode = 2
 begin_cap_mode = 2

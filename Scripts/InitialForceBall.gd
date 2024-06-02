@@ -14,10 +14,3 @@ func _process(_delta):
 	if self.linear_velocity.length() < 400 || self.linear_velocity.length() > 600:
 		var multiplier = 500/self.linear_velocity.length()
 		self.linear_velocity = Vector2(self.linear_velocity.x*multiplier, self.linear_velocity.y*multiplier)
-	var collidingBodies = get_colliding_bodies().filter(func(body): return "Box" in body.name)
-	if(collidingBodies.size() > 0 && not startCollide):
-		for body in collidingBodies:
-			body.DecreaseLife(1)
-		startCollide = true
-	else:
-		startCollide = false

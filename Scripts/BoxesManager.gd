@@ -1,6 +1,7 @@
 extends Node2D
 
 const BoxRef = preload("res://Scenes/Box.tscn")
+const BallRef = preload("res://Scenes/Ball.tscn")
 
 @onready var ballParentRef = get_parent().get_node("BallParent") 
 
@@ -14,6 +15,7 @@ func _ready():
 	
 func _process(_delta):
 	if self.get_child_count() == 0:
+		level += 1
 		boxSize = max(boxSize - 0.3, 0.5)
 		spawnBoxes()
 
@@ -29,6 +31,7 @@ func spawnBoxes():
 			var spawn = randi_range(0,1)
 			if spawn == 1:
 				var newBox = BoxRef.instantiate()
+				newBox.get_node("Area2D").life = pow(5,level)
 				newBox.scale.x = boxSize
 				newBox.scale.y = boxSize
 				newBox.name = "Box" + str(boxCounter)
@@ -39,3 +42,8 @@ func spawnBoxes():
 				newBox.position = Vector2(outPosX, outPosY)
 				boxCounter += 1
 
+func spawnBall():
+	var newBall = BallRef.instantiate()
+	newBall.name = "Ball_" + str(randi_range(0,2147483647))
+	newBall.position = self.position
+	ballParentRef.add_child(newBall)

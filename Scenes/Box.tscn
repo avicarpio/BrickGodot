@@ -1,13 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://bbv7xkp4o4ojs"]
+[gd_scene load_steps=6 format=3 uid="uid://bbv7xkp4o4ojs"]
 
 [ext_resource type="Script" path="res://Scripts/LifeManager.gd" id="1_rh44u"]
 [ext_resource type="Texture2D" uid="uid://3t3dii6qfake" path="res://Sprites/BoxSprite.webp" id="2_8k2bq"]
+[ext_resource type="FontFile" uid="uid://bonsleliebjtb" path="res://Fonts/MontserratAlternates-Bold.ttf" id="3_jhtuv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nuf41"]
-size = Vector2(153, 37)
+size = Vector2(148, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2g6di"]
+size = Vector2(151, 36)
 
 [node name="Box" type="StaticBody2D"]
-script = ExtResource("1_rh44u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_nuf41")
@@ -16,10 +19,23 @@ shape = SubResource("RectangleShape2D_nuf41")
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_8k2bq")
 
-[node name="LifeText" type="Label" parent="."]
-offset_left = -20.0
-offset_top = -12.0
-offset_right = 20.0
-offset_bottom = 11.0
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+script = ExtResource("1_rh44u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_2g6di")
+
+[node name="LifeText" type="Label" parent="Area2D"]
+offset_left = -8.0
+offset_top = -10.0
+offset_right = 314.0
+offset_bottom = 357.0
+scale = Vector2(0.05, 0.05)
+theme_override_fonts/font = ExtResource("3_jhtuv")
+theme_override_font_sizes/font_size = 300
 text = "10"
 horizontal_alignment = 1
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
