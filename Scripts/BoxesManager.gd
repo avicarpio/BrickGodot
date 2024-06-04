@@ -4,6 +4,7 @@ const BoxRef = preload("res://Scenes/Box.tscn")
 const BallRef = preload("res://Scenes/Ball.tscn")
 
 @onready var ballParentRef = get_parent().get_node("BallParent") 
+@onready var levelText = $"../Level"
 
 var boxCounter = 0
 var boxSize = 3
@@ -12,10 +13,12 @@ var level = 1
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	spawnBoxes()
+	updateLevelText()
 	
 func _process(_delta):
 	if self.get_child_count() == 0:
 		level += 1
+		updateLevelText()
 		boxSize = max(boxSize - 0.3, 0.5)
 		spawnBoxes()
 
@@ -25,7 +28,7 @@ func spawnBoxes():
 			ballParentRef.get_child(i).queue_free()
 	var viewSize = get_viewport_rect().size
 	var howBricksH = floor(viewSize.x/(160*boxSize))
-	var howBricksV = floor(viewSize.y/(43.75*boxSize))
+	var howBricksV = floor((viewSize.y - 300)/(43.75*boxSize))
 	for h in range(0,howBricksH):
 		for v in range(0,howBricksV):
 			var spawn = randi_range(0,1)
@@ -38,12 +41,15 @@ func spawnBoxes():
 				self.add_child(newBox)
 				var margin = fmod(viewSize.x,(160 * boxSize * howBricksH)) / (howBricksH * 2)
 				var outPosX = remap(h, 0, howBricksH, -viewSize.x/2+(160*boxSize)/2, viewSize.x/2+(160*boxSize)/2) + margin
-				var outPosY = remap(v, 0, howBricksV, -viewSize.y/2+(43.75*boxSize/2), viewSize.y/2+(43.75*boxSize/2))
+				var outPosY = remap(v, 0, howBricksV, -(viewSize.y - 150)/2+(43.75*boxSize/2), (viewSize.y - 150)/2+(43.75*boxSize/2))
 				newBox.position = Vector2(outPosX, outPosY)
 				boxCounter += 1
 
-func spawnBall():
+func spawnBall(position):
 	var newBall = BallRef.instantiate()
 	newBall.name = "Ball_" + str(randi_range(0,2147483647))
-	newBall.position = self.position
+	newBall.position = position
 	ballParentRef.add_child(newBall)
+
+func updateLevelText():
+	levelText.text = "Level: " + str(level)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bbv7xkp4o4ojs"]
+[gd_scene load_steps=7 format=3 uid="uid://bbv7xkp4o4ojs"]
 
 [ext_resource type="Script" path="res://Scripts/LifeManager.gd" id="1_rh44u"]
-[ext_resource type="Texture2D" uid="uid://3t3dii6qfake" path="res://Sprites/BoxSprite.webp" id="2_8k2bq"]
+[ext_resource type="Texture2D" uid="uid://2khjrpdvrm83" path="res://Sprites/SimpleSprite.png" id="1_sdsih"]
 [ext_resource type="FontFile" uid="uid://bonsleliebjtb" path="res://Fonts/MontserratAlternates-Bold.ttf" id="3_jhtuv"]
+[ext_resource type="AudioStream" uid="uid://brppxkepdbj6j" path="res://Audio/SFX/Bounce.mp3" id="4_emhnb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nuf41"]
 size = Vector2(148, 32)
@@ -17,7 +18,7 @@ shape = SubResource("RectangleShape2D_nuf41")
 
 [node name="BoxSprite" type="Sprite2D" parent="CollisionShape2D"]
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_8k2bq")
+texture = ExtResource("1_sdsih")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
@@ -38,4 +39,12 @@ theme_override_font_sizes/font_size = 300
 text = "10"
 horizontal_alignment = 1
 
+[node name="BounceSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_emhnb")
+bus = &"SFX"
+
+[node name="DieTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="timeout" from="DieTimer" to="Area2D" method="_on_die_timer_timeout"]

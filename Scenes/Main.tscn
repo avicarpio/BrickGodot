@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cupd3a08pm1u5"]
+[gd_scene load_steps=10 format=3 uid="uid://cupd3a08pm1u5"]
 
 [ext_resource type="AudioStream" uid="uid://op2qg4h42jgo" path="res://Audio/Song.mp3" id="1_52f2w"]
 [ext_resource type="PackedScene" uid="uid://b1q73ldxbmvld" path="res://Scenes/Ball.tscn" id="1_s7nuc"]
-[ext_resource type="Texture2D" uid="uid://u56cnqx5b8ft" path="res://Sprites/Background.jpg" id="2_yk2ep"]
+[ext_resource type="Texture2D" uid="uid://c8j0tfeophhje" path="res://Sprites/Background_Edit.jpg" id="3_j2628"]
 [ext_resource type="PackedScene" uid="uid://cknbif3r78xny" path="res://Scenes/Bounds.tscn" id="3_luv3b"]
 [ext_resource type="Script" path="res://Scripts/BoxesManager.gd" id="4_et37k"]
+[ext_resource type="FontFile" uid="uid://bonsleliebjtb" path="res://Fonts/MontserratAlternates-Bold.ttf" id="4_mclgc"]
 [ext_resource type="Shader" path="res://Shaders/BackgroundInfinite.gdshader" id="4_qhjs8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f05sw"]
@@ -24,7 +25,17 @@ bus = &"Music"
 [node name="Background" type="Sprite2D" parent="."]
 texture_repeat = 3
 material = SubResource("ShaderMaterial_f05sw")
-texture = ExtResource("2_yk2ep")
+texture = ExtResource("3_j2628")
+
+[node name="Level" type="Label" parent="."]
+offset_left = -271.0
+offset_top = -590.0
+offset_right = 268.0
+offset_bottom = -528.0
+theme_override_fonts/font = ExtResource("4_mclgc")
+theme_override_font_sizes/font_size = 50
+text = "Level: 1"
+horizontal_alignment = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
