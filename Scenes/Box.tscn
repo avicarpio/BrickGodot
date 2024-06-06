@@ -28,15 +28,16 @@ script = ExtResource("1_rh44u")
 shape = SubResource("RectangleShape2D_2g6di")
 
 [node name="LifeText" type="Label" parent="Area2D"]
-offset_left = -8.0
-offset_top = -10.0
-offset_right = 314.0
-offset_bottom = 357.0
+offset_left = -74.0
+offset_top = -16.0
+offset_right = 2886.0
+offset_bottom = 624.0
 scale = Vector2(0.05, 0.05)
 theme_override_fonts/font = ExtResource("3_jhtuv")
 theme_override_font_sizes/font_size = 300
 text = "10"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="BounceSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_clth6")

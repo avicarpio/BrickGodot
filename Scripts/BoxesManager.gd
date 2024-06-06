@@ -3,6 +3,8 @@ extends Node2D
 const BoxRef = preload("res://Scenes/Box.tscn")
 const BallRef = preload("res://Scenes/Ball.tscn")
 
+var saveGamePath = "user://savedata.save"
+
 @onready var ball_parent = %BallParent
 @onready var levelText = $"../Level"
 
@@ -12,14 +14,17 @@ var level = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	loadGame()
+	boxSize = max(boxSize - 0.3*level, 0.5)
 	spawnBoxes()
 	updateLevelText()
 	
 func _process(_delta):
 	if self.get_child_count() == 0:
 		level += 1
+		saveGame()
 		updateLevelText()
-		boxSize = max(boxSize - 0.3, 0.5)
+		boxSize = max(boxSize - 0.3*level, 0.5)
 		spawnBoxes()
 
 func spawnBoxes():
@@ -53,3 +58,12 @@ func spawnBall(position):
 
 func updateLevelText():
 	levelText.text = "Level: " + str(level)
+
+func saveGame():
+	var file = FileAccess.open(saveGamePath, FileAccess.WRITE)
+	file.store_var(level)
+	
+func loadGame():
+	if FileAccess.file_exists(saveGamePath):
+			var file = FileAccess.open(saveGamePath, FileAccess.READ)
+			level = file.get_var(level)
