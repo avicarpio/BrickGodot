@@ -3,7 +3,7 @@ extends Node2D
 const BoxRef = preload("res://Scenes/Box.tscn")
 const BallRef = preload("res://Scenes/Ball.tscn")
 
-@onready var ballParentRef = get_parent().get_node("BallParent") 
+@onready var ball_parent = %BallParent
 @onready var levelText = $"../Level"
 
 var boxCounter = 0
@@ -23,9 +23,9 @@ func _process(_delta):
 		spawnBoxes()
 
 func spawnBoxes():
-	if ballParentRef.get_child_count() > 1:
-		for i in range(1,ballParentRef.get_child_count()):
-			ballParentRef.get_child(i).queue_free()
+	if ball_parent.get_child_count() > 1:
+		for i in range(1,ball_parent.get_child_count()):
+			ball_parent.get_child(i).queue_free()
 	var viewSize = get_viewport_rect().size
 	var howBricksH = floor(viewSize.x/(160*boxSize))
 	var howBricksV = floor((viewSize.y - 300)/(43.75*boxSize))
@@ -49,7 +49,7 @@ func spawnBall(position):
 	var newBall = BallRef.instantiate()
 	newBall.name = "Ball_" + str(randi_range(0,2147483647))
 	newBall.position = position
-	ballParentRef.add_child(newBall)
+	ball_parent.call_deferred("add_child", newBall)
 
 func updateLevelText():
 	levelText.text = "Level: " + str(level)
