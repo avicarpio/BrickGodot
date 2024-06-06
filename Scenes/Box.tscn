@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/LifeManager.gd" id="1_rh44u"]
 [ext_resource type="Texture2D" uid="uid://2khjrpdvrm83" path="res://Sprites/SimpleSprite.png" id="1_sdsih"]
 [ext_resource type="FontFile" uid="uid://bonsleliebjtb" path="res://Fonts/MontserratAlternates-Bold.ttf" id="3_jhtuv"]
-[ext_resource type="AudioStream" uid="uid://brppxkepdbj6j" path="res://Audio/SFX/Bounce.mp3" id="4_emhnb"]
+[ext_resource type="AudioStream" uid="uid://brppxkepdbj6j" path="res://Audio/SFX/Bounce1.mp3" id="4_clth6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nuf41"]
 size = Vector2(148, 32)
@@ -39,7 +39,7 @@ text = "10"
 horizontal_alignment = 1
 
 [node name="BounceSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_emhnb")
+stream = ExtResource("4_clth6")
 bus = &"SFX"
 
 [node name="DieTimer" type="Timer" parent="."]

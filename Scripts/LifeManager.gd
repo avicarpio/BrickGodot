@@ -13,9 +13,13 @@ var bounceSounds:Array[Resource]
 func _ready():
 	lifeText.text = str(life)
 	
-	for filePath in DirAccess.get_files_at("res://Audio/SFX/"):
-		if filePath.get_extension() == "mp3":
-			bounceSounds.append(load("res://Audio/SFX/" + filePath))
+	bounceSounds.append(preload("res://Audio/SFX/Bounce1.mp3"))
+	bounceSounds.append(preload("res://Audio/SFX/Bounce2.mp3"))
+	bounceSounds.append(preload("res://Audio/SFX/Bounce3.mp3"))
+	bounceSounds.append(preload("res://Audio/SFX/Bounce4.mp3"))
+	bounceSounds.append(preload("res://Audio/SFX/Bounce5.mp3"))
+	bounceSounds.append(preload("res://Audio/SFX/Bounce6.mp3"))
+	bounceSounds.append(preload("res://Audio/SFX/Bounce7.mp3"))
 
 func _on_body_entered(body):
 	if(life > 0):
